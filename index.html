@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+	<title>Info Security Password Rater</title>
+	<script type="text/javascript" src="zxcvbn.js"></script>
+	<script type="text/javascript" src="all.js"></script>
+</head>
+<body>
+	<div class="container">
+		<input id="pw-bar" type="text" size="50" onkeyup="getResults()">
+		<input type="button" value="Check" onclick="getResults()">
+	</div>
+
+	<div id="results">
+	</div>
+</body>
