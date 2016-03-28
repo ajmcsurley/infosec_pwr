@@ -89,7 +89,7 @@ Chart.types.Bar.extend({
 
 //Set up contexts for charts
 var guessesCtx = document.getElementById("guessesChart").getContext("2d");
-var attacksCtx = document.getElementById("onlineThrottleChart").getContext("2d");
+var attacksCtx = document.getElementById("fastHashChart").getContext("2d");
 
 //Graphs start empty
 var data = {

@@ -5,3 +5,7 @@ body {
 #pw-bar {
 	text-align: center;
 }
+
+.chart {
+	display: inline-block;
+}
