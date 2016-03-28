@@ -9,3 +9,7 @@ body {
 .chart {
 	display: inline-block;
 }
+
+footer {
+	display: block;
+}
