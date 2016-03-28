@@ -1,3 +1,7 @@
+function round(n, x) {
+    return Math.round(n * Math.pow(10, x)) / Math.pow(10, x);
+  }
+
 function getResults() {
 	//Grab password
 	var pw = document.getElementById("pw-bar").value;
@@ -5,6 +9,9 @@ function getResults() {
 
 	//Clear results container
 	document.getElementById("results").innerHTML = "";
+
+	//Round guesses
+	result.guesses_log10 = round(result.guesses_log10, 3);
 
 	//Populate results
 	var resultsBox = document.getElementById("results");
