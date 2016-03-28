@@ -45,7 +45,7 @@ function getResults() {
 		if(patterns.sequence[i]){
 			console.log(patterns.sequence[i].token);
 		}
-	}
+	}//test
 	//patternsBox.innerHTML = " <table align=\"center\"> <tbody> <tr> <td>"
 	}
 }
