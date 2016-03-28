@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <head>
 	<title>Info Security Password Rater</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<script type="text/javascript" src="zxcvbn.js"></script>
-	<script type="text/javascript" src="all.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 </head>
 <body>
 	<div>
@@ -11,8 +12,19 @@
 	</div>
 	<div class="container">
 		<input id="pw-bar" type="text" size="50" onkeyup="getResults()">
+
+		<div id="results">
+		</div>
+
+		<div id="charts">
+			<input id="chart-btn" type="button" value="Chart It" disabled="true">
+			<h2>Charting</h2>
+			<canvas id="guessesChart" width="400" height="400"></canvas>
+			<canvas id="onlineThrottleChart" width="400" height="400"></canvas>
+
+		</div>
 	</div>
 
-	<div id="results">
-	</div>
+	<script type="text/javascript" src="all.js"></script>
+
 </body>
