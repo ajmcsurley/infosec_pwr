@@ -1,5 +1,10 @@
 body {
 	text-align: center;
+	width: auto;
+	margin: auto;
+	padding: 20px;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
 #pw-bar {
@@ -12,4 +17,26 @@ body {
 
 footer {
 	display: block;
+}
+
+.panel-primary {
+	float: left;
+	width: 300px;
+}
+
+.panel-default {
+	float: left;
+}
+
+.panel {
+	display: inline;
+	margin: 10px;
+}
+
+.well {
+	padding: 5px;
+}
+
+#results {
+	margin: 5px;
 }

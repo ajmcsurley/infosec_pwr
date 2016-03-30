@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Info Security Password Rater</title>
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+
 	<script type="text/javascript" src="zxcvbn.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 </head>
 <body>
-	<div>
-		<h1>Info Security Password Strength Rater</h1>
-		<p>Type your password in the box:</p>
+	<div class="panel panel-primary">
+  <div class="panel-heading">Info Security Password Rater</div>
+  <div class="panel-body">
+		<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+		<p>This tool is a password rater written in HTML, CSS, and JavaScript. It makes uses of the zxcvbn library provided by DropBox for password metrics. Type in your test password to the box to view its ratings. Below the metrics you can chart the performance of the password by clicking "Chart it". Enjoy!</p>
+		<p id="footer">CSE 4471 - Information Security<br />
+		The Ohio State University<br />
+		Authors - Andrew McSurley, Joey Dye, Trevor Stockert, Samuel Maddox, Kyle Gordon</p>
 	</div>
-	<div class="container">
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		<p>Type your password in the box:</p>
 		<input id="pw-bar" type="text" size="50" onkeyup="getResults()">
 
 		<div id="results">
@@ -30,14 +46,12 @@
 			<canvas id="fastHashChart" width="400" height="400"></canvas>
 			</div>
 		</div>
+		</div>
 	</div>
 
+
+
 	<script type="text/javascript" src="all.js"></script>
-
-	<footer>
-
-		<p>CSE 4471 - Information Security</p> 
-		<p>The Ohio State University</p> 
-		<p>Authors - Andrew McSurley, Joey Dye, Trevor Stockert, Samuel Maddox, Kyle Gordon</p>
-	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
