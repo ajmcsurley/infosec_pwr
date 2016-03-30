@@ -15,10 +15,6 @@ body {
 	display: inline-block;
 }
 
-footer {
-	display: block;
-}
-
 .panel-primary {
 	float: left;
 	width: 300px;
@@ -39,4 +35,8 @@ footer {
 
 #results {
 	margin: 5px;
+}
+
+#footer {
+	font-size: 10px;
 }
