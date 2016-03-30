@@ -15,18 +15,18 @@ body {
 	display: inline-block;
 }
 
-.panel-primary {
-	float: left;
-	width: 300px;
+#downArrow{
+display:inline;
+padding-left: 6px;
+padding-top: 3px;
+cursor:default;
+}
+.panel-heading{
+
 }
 
-.panel-default {
-	float: left;
-}
-
-.panel {
-	display: inline;
-	margin: 10px;
+#hidden {
+display: none;
 }
 
 .well {
