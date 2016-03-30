@@ -15,10 +15,6 @@ body {
 	display: inline-block;
 }
 
-footer {
-	display: block;
-}
-
 .panel-primary {
 	float: left;
 	width: 300px;
@@ -63,4 +59,8 @@ footer {
   to {
     -webkit-transform: scale(1);
   }
+}
+
+#footer {
+	font-size: 10px;
 }
