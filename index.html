@@ -48,9 +48,27 @@
 		<div class="panel-body">
 		<p>Type your password in the box:</p>
 		<input id="pw-bar" type="text" size="50" onkeyup="getResults()">
-
-		<div id="results">
+		
+		<br/>
+		<br/>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="progress" align="center" id="progressBar">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="70" id="progressBar"
+			  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+				0%
+			  </div>
+			</div>
 		</div>
+		<div class="col-md-4"></div>
+		<br/>
+		<br/>
+
+		<!-- Display results from our standards -->
+		<div id="ourResults"> </div>
+		
+		<!-- Display results from zxcvbn database -->
+		<div id="results"> </div>
 
 		<div id="charts">
 			<input id="chart-btn" class="btn btn-default" type="button" value="Chart It" disabled="true">

@@ -1,7 +1,19 @@
+
+document.getElementById("progressBar").style.visibility = "hidden";
+
 //Rounds guess times
 function round(n, x) {
     return Math.round(n * Math.pow(10, x)) / Math.pow(10, x);
   }
+
+//Test for special characters
+function checkSpecial(s){
+	var specialChars = new RegExp(/[~_-`\(\)\@\!#$%\^&*+=\-\[\]\\';,./{}|\\":<>\?]/);
+	if(specialChars.test(s)){
+		return true;
+	}
+	return false;
+}
 
 //Gets results for a specified password
 function getResults() {
@@ -11,14 +23,130 @@ function getResults() {
 	//Checks if password has been given
 	if (pw.length == 0){
 		document.getElementById("results").innerHTML = "";
+		document.getElementById("ourResults").innerHTML = "";
 
 		document.getElementById("chart-btn").disabled = true;
+		
+		document.getElementById("progressBar").style.visibility = "hidden";
+
 	}
 	else{
 
+	document.getElementById("progressBar").style.visibility = "visible";
+	
 	//Make chart button clickable
 	document.getElementById("chart-btn").disabled = false;
 
+	//parse string
+	var num = 0;
+	var lowerCase = 0;
+	var upperCase = 0;
+	var specialChars = 0; 
+	
+	var length = pw.length;
+	for (i = 0; i < length; i++){
+		if(!isNaN(pw[i])){
+			num += 1;
+		} else if (checkSpecial(pw[i])){
+			specialChars += 1;
+		} else if (pw[i] == pw[i].toUpperCase()){
+			upperCase += 1;
+		} else if (pw[i] == pw[i].toLowerCase()){
+			lowerCase += 1;
+		}
+	}
+	
+	// minum requirements: length of 8. 
+	// ranges from: very weak, weak, okay, good, very good, strong, very strong
+	// very weak: < 3 out of the 4 types
+	// weak: only 3 out of the 4 types
+	// okay: 4 out of the 4 types
+	// good: 4 out of the 4 types with > 1 of the type for 3 of the 4
+	// very good: 4 out of the 4 types with > 1 for all types
+	// strong: > 2 for all types and no double characters
+	// very strong: > 3 for all types, no double characters and no consecutive characters
+	
+	var consec = 0;
+	var consecutiveChars = new RegExp(/ZX|XC|CV|VB|BN|NM|AS|SD|DF|FG|GH|HJ|JK|KL|QW|WE|ER|RT|TY|YU|UI|IO|OP|zx|xc|cv|bn|nm|as|sd|df|fg|gh|hj|jk|kl|qw|we|er|rt|ty|yu|ui|io|op|12|23|34|45|56|67|78|89|90|01/);
+	for(k=0; k < length-1; k++){
+		var check = pw[k] + pw[k+1];
+		if(consecutiveChars.test(check)){
+			consec += 1;
+		}
+	}
+	
+	var doubleChar = 0;
+	for(i=0; i < length-1; i++){
+		for(j=i+1; j < length; j++){
+			if(pw[i] == pw[j]){
+				doubleChar += 1;
+			}
+		}
+	}
+	
+	var score = 'Too Short';
+	
+	document.getElementById("progressBar").innerHTML = "0%";
+	document.getElementById("progressBar").style.width = "0%";
+
+	
+	if(length >= 8){
+		score = 'very weak'
+		document.getElementById("progressBar").innerHTML = "very weak";
+		document.getElementById("progressBar").style.width = "14.28%";
+		document.getElementById("progressBar").style.backgroundColor = "red";
+
+		if((num > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && upperCase > 0 && specialChars > 0) || (specialChars > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && specialChars > 0 && lowerCase > 0)) {
+			score = 'weak';
+			document.getElementById("progressBar").innerHTML = "weak";
+			document.getElementById("progressBar").style.width = "28.56%";
+			document.getElementById("progressBar").style.backgroundColor = "#FC8888";
+			if(num >= 1 && upperCase >= 1 && specialChars >= 1){
+				score = 'okay';
+				document.getElementById("progressBar").innerHTML = "okay";
+				document.getElementById("progressBar").style.width = "42.84%";
+				document.getElementById("progressBar").style.backgroundColor = "orange";
+				if((num > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && upperCase > 1 && specialChars > 1) || (specialChars > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && specialChars > 1 && lowerCase > 1)) {
+					score = 'good';
+					document.getElementById("progressBar").innerHTML = "good";
+					document.getElementById("progressBar").style.width = "57.12%";
+					document.getElementById("progressBar").style.backgroundColor = "yellow";
+					if(num > 1 && upperCase > 1 && specialChars > 1 && lowerCase > 1){
+						score = 'very good';
+						document.getElementById("progressBar").innerHTML = "very good";
+						document.getElementById("progressBar").style.width = "71.4";
+						document.getElementById("progressBar").style.backgroundColor = "blue";
+						if(num > 2 && upperCase > 2 && specialChars > 2 && lowerCase > 2 && doubleChar == 0){
+							score = 'strong'
+							document.getElementById("progressBar").innerHTML = "strong";
+							document.getElementById("progressBar").style.width = "85.68%";
+							document.getElementById("progressBar").style.backgroundColor = "#88CCFC";
+							if(num > 3 && upperCase > 3 && specialChars > 3 && lowerCase > 3 && consec == 0){
+								score = 'very strong'
+								document.getElementById("progressBar").innerHTML = "very strong";
+								document.getElementById("progressBar").style.width = "100%";
+								document.getElementById("progressBar").style.backgroundColor = "green";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	document.getElementById("ourResults").innerHTML = "";
+	ourResultContent = "<table class=\"well\" align=\"center\"> <tbody>";
+	ourResultContent += "<tr> <td> Password Length: </td> <td>" + length + "</td> </tr>";
+	ourResultContent += "<tr> <td> Numbers: </td> <td>" + num + "</td> </tr>";
+	ourResultContent += "<tr> <td> Special Characters: </td> <td>" + specialChars + "</td> </tr>";
+	ourResultContent += "<tr> <td> Upper Case Letters: </td> <td>" + upperCase + "</td> </tr>";
+	ourResultContent += "<tr> <td> Lower Case Letters: </td> <td>" + lowerCase + "</td> </tr>";
+	ourResultContent += "<tr> <td> Repeated Characters: </td> <td>" + doubleChar + "</td> </tr>";
+	ourResultContent += "<tr> <td> Consectutive Characters: </td> <td>" + consec + "</td> </tr>";
+	ourResultContent += "<tr> <td> Score: </td> <td>" + score + "</td> </tr>";
+	ourResultContent += "<tr> <td>  </tbody> </table>";
+	document.getElementById("ourResults").innerHTML = ourResultContent;
+	
 	//Get result obj
 	var result = zxcvbn(pw);
 
@@ -31,8 +159,23 @@ function getResults() {
 
 	//Populate results
 	var resultsBox = document.getElementById("results");
-	resultsBox.innerHTML = " <table class=\"well\" align=\"center\"> <tbody> <tr> <td>Password: </td> <td>" + pw + "</td> </tr> <tr> <td>Your Score Is: </td> <td>" + result.score + "</td> </tr> <tr> <td>Time to Crack: </td> <td>" + result.calc_time + "</td> </tr> <tr> <td>Guesses: </td> <td>" + result.guesses + "</td> </tr> <tr> <td>Guesses_log10: </td> <td>" + result.guesses_log10 + "</td> </tr> <tr> <td>Guess Times: </td> </tr> <tr> <td>Online Throttled Attack: </td> <td>" + result.crack_times_display.online_throttling_100_per_hour + "</td> </tr> <tr> <td>Online, No Throttle Atack: </td> <td>" + result.crack_times_display.online_no_throttling_10_per_second + "</td> </tr> <tr> <td>Offline, Slow Hashing: </td> <td>" + result.crack_times_display.offline_slow_hashing_1e4_per_second + "</td> </tr> <tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr> <tr> <td>Warning for Future Use (Score <= 2): </td> <td>" + result.feedback.warning + "</td> </tr> <tr> <td>Suggestions: </td> <td>" + result.feedback.suggestions + "</td> </tr> </tbody> </table>"
-
+	var resultContent = " <table class=\"well\" align=\"center\"> <tbody> <tr><h4>From the zxcvbn dropbox database</h4></tr>";
+	resultContent += "<tr> <td>Password: </td> <td>" + pw + "</td> </tr>";
+	resultContent += "<tr> <td>Your Score Is: </td> <td>" + result.score + "</td> </tr>";
+	resultContent += "<tr> <td>Time to Crack: </td> <td>" + result.calc_time + "</td> </tr>";
+	resultContent += "<tr> <td>Guesses: </td> <td>" + result.guesses + "</td> </tr>";
+	resultContent += "<tr> <td>Guesses_log10: </td> <td>" + result.guesses_log10 + "</td> </tr>";
+	resultContent += "<tr> <td>Guess Times: </td> </tr>";
+	resultContent += "<tr> <td>Online Throttled Attack: </td> <td>" + result.crack_times_display.online_throttling_100_per_hour + "</td> </tr>";
+	resultContent += "<tr> <td>Online, No Throttle Atack: </td> <td>" + result.crack_times_display.online_no_throttling_10_per_second + "</td> </tr>";
+	resultContent += "<tr> <td>Offline, Slow Hashing: </td> <td>" + result.crack_times_display.offline_slow_hashing_1e4_per_second + "</td> </tr>";
+	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
+	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
+	resultContent += "<tr> <td>Warning for Future Use (Score <= 2): </td> <td>" + result.feedback.warning + "</td> </tr> <tr>";
+	resultContent += "<td>Suggestions: </td> <td>" + result.feedback.suggestions + "</td> </tr>";
+	resultContent += "</tbody> </table>";
+	
+	resultsBox.innerHTML = resultContent;
 	//Add button to chart
 	//resultsBox.innerHTML = resultsBox.innerHTML + "<input id=\"chart-btn\" type=\"button\" value=\"Chart It\">";
 
