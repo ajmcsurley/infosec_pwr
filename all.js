@@ -14,6 +14,75 @@ function checkSpecial(s){
 	}
 	return false;
 }
+var passwordLength = 6;
+var doubleCount = 256;
+var consecCount = 256;
+
+var socMedia = 0;
+var email = 0;
+var bank = 0;
+
+function passDefault(){
+	passwordLength = 6;
+	socMedia = 0;
+	email = 0;
+	bank = 0;
+	doubleCount = 2;
+	consecCount = 2;
+	document.getElementById("pw-bar").value = "";
+	document.getElementById("progressBar").style.width = "0%";
+	$("#myCarousel").carousel(0);
+	$("#myCarousel").carousel("pause");
+}
+function eight (){
+	passwordLength = 8;
+	consecCount = 4;
+	socMedia = 1;
+	email = 0;
+	bank = 0;
+	document.getElementById("pw-bar").value = "";
+	document.getElementById("progressBar").style.width = "0%";
+	$("#myCarousel").carousel(1);
+	$("#myCarousel").carousel("pause"); 
+}
+function twelve (){
+	passwordLength = 12;
+	doubleCount = 4;
+	consecCount = 2;
+	socMedia = 0;
+	email = 1;
+	bank = 0;
+	document.getElementById("pw-bar").value = "";
+	document.getElementById("progressBar").style.width = "0%";
+	$("#myCarousel").carousel(2);
+	$("#myCarousel").carousel("pause"); 
+}
+function twentyFour (){
+	passwordLength = 24;
+	doubleCount = 2;
+	consecCount = 0;
+	socMedia = 0;
+	email = 0;
+	bank = 1;
+	document.getElementById("pw-bar").value = "";
+	document.getElementById("progressBar").style.width = "0%";
+	$("#myCarousel").carousel(3);
+	$("#myCarousel").carousel("pause"); 
+
+}
+function thirtyTwo (){
+	passwordLength = 32;
+	doubleCount = 0;
+	consecCount = 0;
+	socMedia = 0;
+	email = 0;
+	bank = 0;	
+	document.getElementById("pw-bar").value = "";
+	document.getElementById("progressBar").style.width = "0%";
+	$("#myCarousel").carousel(4);
+	$("#myCarousel").carousel("pause"); 
+
+}
 
 //Gets results for a specified password
 function getResults() {
@@ -56,15 +125,15 @@ function getResults() {
 		}
 	}
 	
-	// minum requirements: length of 8. 
+	// default minum requirements: length of 6. 
 	// ranges from: very weak, weak, okay, good, very good, strong, very strong
 	// very weak: < 3 out of the 4 types
 	// weak: only 3 out of the 4 types
 	// okay: 4 out of the 4 types
 	// good: 4 out of the 4 types with > 1 of the type for 3 of the 4
 	// very good: 4 out of the 4 types with > 1 for all types
-	// strong: > 2 for all types and no double characters
-	// very strong: > 3 for all types, no double characters and no consecutive characters
+	// strong: > 2 for all types and  <= 2 double characters
+	// very strong: > 3 for all types, <= 2 double characters and <= 2 consecutive characters
 	
 	var consec = 0;
 	var consecutiveChars = new RegExp(/ZX|XC|CV|VB|BN|NM|AS|SD|DF|FG|GH|HJ|JK|KL|QW|WE|ER|RT|TY|YU|UI|IO|OP|zx|xc|cv|bn|nm|as|sd|df|fg|gh|hj|jk|kl|qw|we|er|rt|ty|yu|ui|io|op|12|23|34|45|56|67|78|89|90|01/);
@@ -88,54 +157,80 @@ function getResults() {
 	
 	document.getElementById("progressBar").innerHTML = "0%";
 	document.getElementById("progressBar").style.width = "0%";
-
 	
-	if(length >= 8){
+	if(length >= passwordLength){
 		score = 'very weak'
 		document.getElementById("progressBar").innerHTML = "very weak";
 		document.getElementById("progressBar").style.width = "14.28%";
 		document.getElementById("progressBar").style.backgroundColor = "red";
 
 		if((num > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && upperCase > 0 && specialChars > 0) || (specialChars > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && specialChars > 0 && lowerCase > 0)) {
-			score = 'weak';
-			document.getElementById("progressBar").innerHTML = "weak";
-			document.getElementById("progressBar").style.width = "28.56%";
-			document.getElementById("progressBar").style.backgroundColor = "#FC8888";
-			if(num >= 1 && upperCase >= 1 && specialChars >= 1){
-				score = 'okay';
-				document.getElementById("progressBar").innerHTML = "okay";
-				document.getElementById("progressBar").style.width = "42.84%";
-				document.getElementById("progressBar").style.backgroundColor = "orange";
-				if((num > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && upperCase > 1 && specialChars > 1) || (specialChars > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && specialChars > 1 && lowerCase > 1)) {
-					score = 'good';
-					document.getElementById("progressBar").innerHTML = "good";
-					document.getElementById("progressBar").style.width = "57.12%";
-					document.getElementById("progressBar").style.backgroundColor = "yellow";
-					if(num > 1 && upperCase > 1 && specialChars > 1 && lowerCase > 1){
-						score = 'very good';
-						document.getElementById("progressBar").innerHTML = "very good";
-						document.getElementById("progressBar").style.width = "71.4";
-						document.getElementById("progressBar").style.backgroundColor = "blue";
-						if(num > 2 && upperCase > 2 && specialChars > 2 && lowerCase > 2 && doubleChar == 0){
-							score = 'strong'
-							document.getElementById("progressBar").innerHTML = "strong";
-							document.getElementById("progressBar").style.width = "85.68%";
-							document.getElementById("progressBar").style.backgroundColor = "#88CCFC";
-							if(num > 3 && upperCase > 3 && specialChars > 3 && lowerCase > 3 && consec == 0){
-								score = 'very strong'
-								document.getElementById("progressBar").innerHTML = "very strong";
-								document.getElementById("progressBar").style.width = "100%";
-								document.getElementById("progressBar").style.backgroundColor = "green";
+			
+			if(socMedia != 1) {
+				score = 'weak';
+				document.getElementById("progressBar").innerHTML = "weak";
+				document.getElementById("progressBar").style.width = "28.56%";
+				document.getElementById("progressBar").style.backgroundColor = "#FC8888";
+				if(num >= 1 && upperCase >= 1 && specialChars >= 1 && lowerCase >= 1){
+					score = 'okay';
+					document.getElementById("progressBar").innerHTML = "okay";
+					document.getElementById("progressBar").style.width = "42.84%";
+					document.getElementById("progressBar").style.backgroundColor = "orange";
+					if((num > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && upperCase > 1 && specialChars > 1) || (specialChars > 1 && upperCase > 1 && lowerCase > 1) || (num > 1 && specialChars > 1 && lowerCase > 1)) {
+						if(email != 1) {
+							score = 'good';
+							document.getElementById("progressBar").innerHTML = "good";
+							document.getElementById("progressBar").style.width = "57.12%";
+							document.getElementById("progressBar").style.backgroundColor = "yellow";
+							if(num > 1 && upperCase > 1 && specialChars > 1 && lowerCase > 1){
+								score = 'very good';
+								document.getElementById("progressBar").innerHTML = "very good";
+								document.getElementById("progressBar").style.width = "71.4";
+								document.getElementById("progressBar").style.backgroundColor = "blue";
+								if(num > 2 && upperCase > 2 && specialChars > 2 && lowerCase > 2 && doubleChar <= doubleCount){
+									
+									if(bank != 1) {
+										score = 'strong'
+										document.getElementById("progressBar").innerHTML = "strong";
+										document.getElementById("progressBar").style.width = "85.68%";
+										document.getElementById("progressBar").style.backgroundColor = "#88CCFC";
+										if(num > 3 && upperCase > 3 && specialChars > 3 && lowerCase > 3 && consec <= consecCount){
+											score = 'very strong'
+											document.getElementById("progressBar").innerHTML = "very strong";
+											document.getElementById("progressBar").style.width = "100%";
+											document.getElementById("progressBar").style.backgroundColor = "green";
+										}
+									} else {
+										
+										score = 'very strong'
+										document.getElementById("progressBar").innerHTML = "very strong";
+										document.getElementById("progressBar").style.width = "100%";
+										document.getElementById("progressBar").style.backgroundColor = "green";
+									
+									}
+				
+								}
 							}
+						} else {
+						score = 'very strong'
+						document.getElementById("progressBar").innerHTML = "very strong";
+						document.getElementById("progressBar").style.width = "100%";
+						document.getElementById("progressBar").style.backgroundColor = "green";
 						}
-					}
+					} 
 				}
-			}
+			} else {
+				
+				score = 'very strong'
+				document.getElementById("progressBar").innerHTML = "very strong";
+				document.getElementById("progressBar").style.width = "100%";
+				document.getElementById("progressBar").style.backgroundColor = "green";
+				}
 		}
 	}
 	
 	document.getElementById("ourResults").innerHTML = "";
-	ourResultContent = "<table class=\"well\" align=\"center\"> <tbody>";
+	ourResultContent = "<table class=\"well\" align=\"center\"> <tbody> <tr><h4>Results from our password rating system </h4></tr>";
 	ourResultContent += "<tr> <td> Password Length: </td> <td>" + length + "</td> </tr>";
 	ourResultContent += "<tr> <td> Numbers: </td> <td>" + num + "</td> </tr>";
 	ourResultContent += "<tr> <td> Special Characters: </td> <td>" + specialChars + "</td> </tr>";
@@ -143,7 +238,7 @@ function getResults() {
 	ourResultContent += "<tr> <td> Lower Case Letters: </td> <td>" + lowerCase + "</td> </tr>";
 	ourResultContent += "<tr> <td> Repeated Characters: </td> <td>" + doubleChar + "</td> </tr>";
 	ourResultContent += "<tr> <td> Consectutive Characters: </td> <td>" + consec + "</td> </tr>";
-	ourResultContent += "<tr> <td> Score: </td> <td>" + score + "</td> </tr>";
+	ourResultContent += "<tr> <td><b> Score: </td> <td>" + score + "</b></td> </tr>";
 	ourResultContent += "<tr> <td>  </tbody> </table>";
 	document.getElementById("ourResults").innerHTML = ourResultContent;
 	
@@ -159,7 +254,7 @@ function getResults() {
 
 	//Populate results
 	var resultsBox = document.getElementById("results");
-	var resultContent = " <table class=\"well\" align=\"center\"> <tbody> <tr><h4>From the zxcvbn dropbox database</h4></tr>";
+	var resultContent = " <table class=\"well\" align=\"center\"> <tbody> <tr><h4>Results from the zxcvbn dropbox database</h4></tr>";
 	resultContent += "<tr> <td>Password: </td> <td>" + pw + "</td> </tr>";
 	resultContent += "<tr> <td>Your Score Is: </td> <td>" + result.score + "</td> </tr>";
 	resultContent += "<tr> <td>Time to Crack: </td> <td>" + result.calc_time + "</td> </tr>";

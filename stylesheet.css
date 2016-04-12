@@ -64,3 +64,16 @@ display: none;
 #footer {
 	font-size: 10px;
 }
+
+.carousel-inner > .item > div{
+		margin: auto;
+		background-color: #E9E9E9;
+	}
+	  
+.pass{
+	text-align:center;
+	padding: 5%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 20%;
+}
