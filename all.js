@@ -161,7 +161,7 @@ function getResults() {
 	if(length >= passwordLength){
 		score = 'very weak'
 		document.getElementById("progressBar").innerHTML = "very weak";
-		document.getElementById("progressBar").style.width = "14.28%";
+		document.getElementById("progressBar").style.width = "20%";
 		document.getElementById("progressBar").style.backgroundColor = "red";
 
 		if((num > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && upperCase > 0 && specialChars > 0) || (specialChars > 0 && upperCase > 0 && lowerCase > 0) || (num > 0 && specialChars > 0 && lowerCase > 0)) {
@@ -265,10 +265,68 @@ function getResults() {
 	resultContent += "<tr> <td>Online, No Throttle Atack: </td> <td>" + result.crack_times_display.online_no_throttling_10_per_second + "</td> </tr>";
 	resultContent += "<tr> <td>Offline, Slow Hashing: </td> <td>" + result.crack_times_display.offline_slow_hashing_1e4_per_second + "</td> </tr>";
 	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
-	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
 	resultContent += "<tr> <td>Warning for Future Use (Score <= 2): </td> <td>" + result.feedback.warning + "</td> </tr> <tr>";
 	resultContent += "<td>Suggestions: </td> <td>" + result.feedback.suggestions + "</td> </tr>";
 	resultContent += "</tbody> </table>";
+	resultContent += "<h4  align=\"center\">Pattern Matches:</h4>";
+	for(i = 0; i < result.sequence.length; i++) {
+		resultContent += "<span>";
+		resultContent += "<table class=\"well\" align=\"center\"> <tbody>";
+		if (result.sequence[i].token){
+			resultContent += "<tr> <td> pattern: </td> <td>" + result.sequence[i].token + "</td> </tr>";
+		}
+		if (result.sequence[i].pattern){
+			resultContent += "<tr> <td> type: </td> <td>" + result.sequence[i].pattern + "</td> </tr>";
+		}
+		if (result.sequence[i].guesses_log10){
+			resultContent += "<tr> <td> Guesses_log10: </td> <td>" + round(result.sequence[i].guesses_log10, 3) + "</td> </tr>";
+		}
+		if (result.sequence[i].dictionary_name){
+			resultContent += "<tr> <td> Dictionary Name: </td> <td>" + result.sequence[i].dictionary_name + "</td> </tr>";
+		}
+		if (result.sequence[i].rank){
+			resultContent += "<tr> <td> Rank: </td> <td>" + result.sequence[i].rank + "</td> </tr>";
+		}
+		if (result.sequence[i].reversed){
+			resultContent += "<tr> <td> Reversed: </td> <td>" + result.sequence[i].reversed + "</td> </tr>";
+		}
+		if (result.sequence[i].base_guesses){
+			resultContent += "<tr> <td> Base Guesses: </td> <td>" + result.sequence[i].base_guesses + "</td> </tr>";
+		}
+		if (result.sequence[i].uppercase_variations){
+			resultContent += "<tr> <td> Uppercase variations: </td> <td>" + result.sequence[i].uppercase_variations + "</td> </tr>";
+		}
+		if (result.sequence[i].l33t_variations){
+			resultContent += "<tr> <td> \"l33t\" variations: </td> <td>" + result.sequence[i].l33t_variations + "</td> </tr>";
+		}
+		if (result.sequence[i].sub_display){
+			resultContent += "<tr> <td> \"l33t\" substituion: </td> <td>" + result.sequence[i].sub_display + "</td> </tr>";
+
+		}
+		if (result.sequence[i].matched_word){
+			resultContent += "<tr> <td> un-\"l33t\" matched word: </td> <td>" + result.sequence[i].matched_word + "</td> </tr>";
+
+		}
+		if (result.sequence[i].month){
+			resultContent += "<tr> <td> Month: </td> <td>" + result.sequence[i].month + "</td> </tr>";
+
+		}
+		if (result.sequence[i].day){
+			resultContent += "<tr> <td> Day: </td> <td>" + result.sequence[i].day + "</td> </tr>";
+
+		}
+		if (result.sequence[i].year){
+			resultContent += "<tr> <td> Year: </td> <td>" + result.sequence[i].year + "</td> </tr>";
+
+		}
+
+		if (result.sequence[i].regex_name){
+			resultContent += "<tr> <td> regex: </td> <td>" + result.sequence[i].regex_name + "</td> </tr>";
+		}
+		resultContent += "</tbody> </table>";
+		resultContent += "</span>";
+	}
+
 	
 	resultsBox.innerHTML = resultContent;
 	//Add button to chart
