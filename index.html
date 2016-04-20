@@ -40,7 +40,7 @@
   <div id ="hidden" class="panel-body">
 		
 		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-		<p>This tool is a password rater written in HTML, CSS, and JavaScript. It makes uses of the zxcvbn library provided by DropBox for password metrics. Type in your test password to the box to view its ratings. Below the metrics you can chart the performance of the password by clicking "Chart it". Enjoy!</p>
+		<p>This tool is a password rater written in HTML, CSS, and JavaScript.  We have implemented our own unique rating system.  Furthermore, it makes use of the 'zxcvbn' script provided by DropBox for password metrics. Type in your test password to the box to view its many ratings. Below the metrics you can chart the performance of the password by clicking "Chart it". Enjoy!</p>
 		<p id="footer">CSE 4471 - Information Security; The Ohio State University<br />
 		
 		Authors - Andrew J. McSurley, Joey Dye, Trevor Stockert, Samuel Maddox, Kyle Gordon</p>
@@ -58,15 +58,14 @@
 		<br/>
 		<br/>
 		<div class="col-md-2">
-			<ul><b>About our rating system:</b></ul>
-			<ul>First checks to make sure the required lengh is met</ul>
-			<ul>Once length is met the number of upper case letters, lower case letters, special characters, and numbers are taken into account.</ul>
-			<ul>The checker then calculates the number of consecutive characters and the number of double letters in the password. 
-					<li>Consecutive characters are any consecutive keys on the key baord (ie. as, ZXCVBNM, 1234, etc) </li>
-					<li>Double characters are any characters that appear twice in the password (ie. aaaa, GG, 2222222, etc)</li>
-			</ul>
-			<ul>The length requirements, number of upper case, lower case, special characters, and numbers, as well as the allowed number of double and consecutive characters vary depending on the use of the password (selected on the right).</ul>
-			<ul>*Lower Case, Upper Case, Special Characters, and Numbers are also refered to as the 4 types*</ul>
+			<ul><b>Rating System Checklist:</b></ul>
+			<li>Length</li>
+			<li>Upper case letters, lower case letters, special characters, and numbers amounts</li>
+			<li>Consecutive and Double Letter Amounts
+			<li>Consecutive characters - consecutive keys on the keyboard (ie. as, ZXCVBNM, 1234, etc) </li>
+			<li>Double characters - appear twice in the password (ie. aaaa, GG, 2222222, etc)</li>
+			</li>
+			<li>Different Password Use Requirements (right-hand side)</li>
 		</div>
 		<div class="col-md-8">
 			<div class = "col-md-3"></div>
