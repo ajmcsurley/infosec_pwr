@@ -267,7 +267,6 @@ function getResults() {
 	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
 	resultContent += "<tr> <td>Warning for Future Use (Score <= 2): </td> <td>" + result.feedback.warning + "</td> </tr> <tr>";
 	resultContent += "<td>Suggestions: </td> <td>" + result.feedback.suggestions + "</td> </tr>";
-	resultContent += "<td>EEEE: </td> <td>" + result.entropy + "</td> </tr>";
 
 	resultContent += "</tbody> </table>";
 	resultContent += "<h4  align=\"center\">Pattern Matches:</h4>";
