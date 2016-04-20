@@ -377,7 +377,7 @@ Chart.types.Bar.extend({
         ctx.translate(x, y)
         // rotate text
         ctx.rotate(-90 * Math.PI / 180);
-        ctx.fillText(this.datasets[0].label, 0, 0);
+        //ctx.fillText(this.datasets[0].label, 0, 0);
         ctx.restore();
     }
 });
