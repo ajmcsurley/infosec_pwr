@@ -340,27 +340,6 @@ function getResults() {
 	}
 }
 
-//Override so empty chart will work
-/*
-Chart.Scale = Chart.Scale.extend({
-    calculateX: function (index) {
-        //check to ensure data is in chart otherwise we will get inifinity
-        if (!(this.valuesCount - (this.offsetGridLines ? 0 : 1))) {
-            return 0;
-        }
-        var isRotated = (this.xLabelRotation > 0),
-            // innerWidth = (this.offsetGridLines) ? this.width - offsetLeft - this.padding : this.width - (offsetLeft + halfLabelWidth * 2) - this.padding,
-            innerWidth = this.width - (this.xScalePaddingLeft + this.xScalePaddingRight),
-            valueWidth = this.valuesCount === 0 ? 0 : innerWidth / (this.valuesCount - ((this.offsetGridLines) ? 0 : 1)),
-            valueOffset = (valueWidth * index) + this.xScalePaddingLeft;
-
-        if (this.offsetGridLines) {
-            valueOffset += (valueWidth / 2);
-        }
-
-        return Math.round(valueOffset);
-    },
-});*/
 
 //Add Y-Axis
 Chart.types.Bar.extend({
