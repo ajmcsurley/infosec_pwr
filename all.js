@@ -257,7 +257,7 @@ function getResults() {
 	var resultContent = " <table class=\"well\" align=\"center\"> <tbody> <tr><h4>Results from the zxcvbn dropbox database</h4></tr>";
 	resultContent += "<tr> <td>Password: </td> <td>" + pw + "</td> </tr>";
 	resultContent += "<tr> <td>Your Score Is: </td> <td>" + result.score + "</td> </tr>";
-	resultContent += "<tr> <td>Time to Crack: </td> <td>" + result.calc_time + "</td> </tr>";
+	resultContent += "<tr> <td>Time to Crack: </td> <td>" + result.calc_time + "  (seconds)</td> </tr>";
 	resultContent += "<tr> <td>Guesses: </td> <td>" + result.guesses + "</td> </tr>";
 	resultContent += "<tr> <td>Guesses_log10: </td> <td>" + result.guesses_log10 + "</td> </tr>";
 	resultContent += "<tr> <td>Guess Times: </td> </tr>";
@@ -267,6 +267,8 @@ function getResults() {
 	resultContent += "<tr> <td>Offline, Fast Hashing: </td> <td>" + result.crack_times_display.offline_fast_hashing_1e10_per_second + "</td> </tr>";
 	resultContent += "<tr> <td>Warning for Future Use (Score <= 2): </td> <td>" + result.feedback.warning + "</td> </tr> <tr>";
 	resultContent += "<td>Suggestions: </td> <td>" + result.feedback.suggestions + "</td> </tr>";
+	resultContent += "<td>EEEE: </td> <td>" + result.entropy + "</td> </tr>";
+
 	resultContent += "</tbody> </table>";
 	resultContent += "<h4  align=\"center\">Pattern Matches:</h4>";
 	for(i = 0; i < result.sequence.length; i++) {
@@ -294,10 +296,10 @@ function getResults() {
 			resultContent += "<tr> <td> Base Guesses: </td> <td>" + result.sequence[i].base_guesses + "</td> </tr>";
 		}
 		if (result.sequence[i].uppercase_variations){
-			resultContent += "<tr> <td> Uppercase variations: </td> <td>" + result.sequence[i].uppercase_variations + "</td> </tr>";
+			resultContent += "<tr> <td> Uppercase variations: </td> <td>" + (result.sequence[i].uppercase_variations - 1) + "</td> </tr>";
 		}
 		if (result.sequence[i].l33t_variations){
-			resultContent += "<tr> <td> \"l33t\" variations: </td> <td>" + result.sequence[i].l33t_variations + "</td> </tr>";
+			resultContent += "<tr> <td> \"l33t\" variations: </td> <td>" + (result.sequence[i].l33t_variations - 1) + "</td> </tr>";
 		}
 		if (result.sequence[i].sub_display){
 			resultContent += "<tr> <td> \"l33t\" substituion: </td> <td>" + result.sequence[i].sub_display + "</td> </tr>";
@@ -306,6 +308,9 @@ function getResults() {
 		if (result.sequence[i].matched_word){
 			resultContent += "<tr> <td> un-\"l33t\" matched word: </td> <td>" + result.sequence[i].matched_word + "</td> </tr>";
 
+		}
+		if (result.sequence[i].turns){
+			resultContent += "<tr> <td> turns: </td> <td>" + result.sequence[i].turns + "</td> </tr>";
 		}
 		if (result.sequence[i].month){
 			resultContent += "<tr> <td> Month: </td> <td>" + result.sequence[i].month + "</td> </tr>";
