@@ -10,6 +10,10 @@ This tool is a password rater written in HTML, CSS, and JavaScript. We have impl
 - __stylesheet.css__ - Styling of elements is contained in this main stylesheet.
 - __zxcvbn.js__ - Script for the Dropbox 'zxcvbn' function to use its rating system and output the results.
 
+##How to Run
+
+Simply open the index.html in any browser or go to ajmcsurley.github.io/infosec_pwr .
+
 ##Authors
 - Andrew McSurley
 - Trevor Stockert
