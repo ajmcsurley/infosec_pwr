@@ -53,7 +53,10 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 		<p>Type your password in the box:</p>
-		<input id="pw-bar" type="text" size="50" onkeyup="getResults()">
+		<div class = "col-md-4"></div>
+		<div class = "col-md-4">
+		<input  id="pw-bar" type="text" onkeyup="getResults()">
+		</div>
 		
 		<br/>
 		<br/>
@@ -91,16 +94,20 @@
 			<div id="charts">
 				<input id="chart-btn" class="btn btn-default" type="button" value="Chart It" disabled="true">
 				<h3>Charting From zxcvbn Dropbox Database</h3>
-
+				<div class = "col-md-2"></div>
+				<div class = "col-md-4">
 				<div class="chart">
 				<h3>Password Guess Attempts</h3>
-				<canvas id="guessesChart" width = "300" height="400"></canvas>
+				<canvas id="guessesChart"  height="400"></canvas>
 				</div>
-
+					</div>
+				<div class = "col-md-4">
 				<div class="chart">
 				<h3>Fast Hash Attack Times</h3>
-				<canvas id="fastHashChart" width="300" height="400"></canvas>
+				<canvas id="fastHashChart" height="400"></canvas>
 				</div>
+					</div>
+				<div class = "col-md-2"></div>
 			</div>
 		</div>
 		
